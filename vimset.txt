@@ -1,3 +1,48 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+
+
+
 "utf8 setting
 set fileencoding=utf-8
 set fileencodings=utf-8,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1
@@ -5,25 +50,42 @@ set encoding=utf-8
 set tenc=utf-8
 set fenc=utf-8
 
+"快捷切換編碼
+"set <C-u>=^U
+"set <C-b>=^B
+"map <C-u> :set fileencoding=utf8
+"map <C-b> :set fileencoding=big5
+
+
+"自動縮排
+set autoindent
+
 nmap <F4> <ESC>:NERDTree<CR>
 
+"搜尋不分大小寫
+set ic
 
+"增加底線
+set cursorline
+
+"Expand TABs to spaces
 set expandtab
+"Sets the number of columns for a TAB
 set shiftwidth=4
+"Sets the number of columns for a TAB
 set softtabstop=4
+"The width of a TAB is set to 4.
 set tabstop=4
+
+"直線
+set cursorcolumn
+set cursorline
 
 set cindent
 
-set background=dark
+"set background=dark
 
 :colorscheme darkblue
-
-"utf8 setting
-"set fileencoding=utf-8
-"set fileencodings=utf-8,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1
-"set encoding=utf8
-"set tenc=utf8
 
 set nocompatible
 set nu
@@ -43,4 +105,38 @@ set foldmethod=marker
 
 "vim支援 256色
 set t_Co=256
+
+set autoread
+"status line
+
+com! -bang W :w
+com! -bang Q :q
+
+" open file show last position
+if has("autocmd")
+   autocmd BufRead *.txt set tw=78
+   autocmd BufReadPost *
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal g'\"" |
+      \ endif
+endif
+
+
+" 总是显示状态行
+"set laststatus=2
+"set statusline=%<[%F]\ %m%=\ %h%r\ %-19([%p%%]\ %3l,%02c%03V%)%y
+"highlight StatusLine term=bold,reverse cterm=bold,reverse ctermfg=8
+
+"status bar
+set laststatus=2 
+set statusline=%4*%<\ %1*[%F] 
+set statusline+=%4*\ %5*[%{&encoding}, " encoding 
+set statusline+=%{&fileformat}]%m " file format 
+set statusline+=%4*%=\ %6*%y%4*\ %3*%l%4*,\ %3*%c%4*\ \<\ %2*%P%4*\ \> 
+highlight User1 ctermfg=red 
+highlight User2 term=underline cterm=underline ctermfg=green 
+highlight User3 term=underline cterm=underline ctermfg=yellow 
+highlight User4 term=underline cterm=underline ctermfg=white 
+highlight User5 ctermfg=cyan 
+highlight User6 ctermfg=white 
 
