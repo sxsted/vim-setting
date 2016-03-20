@@ -42,7 +42,6 @@ filetype plugin indent on    " required
 
 
 
-
 "utf8 setting
 set fileencoding=utf-8
 set fileencodings=utf-8,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1
@@ -78,14 +77,18 @@ set softtabstop=4
 set tabstop=4
 
 "直線
-set cursorcolumn
-set cursorline
+"set cursorcolumn
+"set cursorline
 
 set cindent
 
+"syntax on
 "set background=dark
-
-:colorscheme darkblue
+"colorscheme vanzan_color
+"colorscheme blackboard
+colorscheme darkblue
+"colorscheme primary 
+"colorscheme PerfectDark 
 
 set nocompatible
 set nu
@@ -93,6 +96,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" autocomplete js
+set omnifunc=javascriptcomplete#CompleteJS
 "delete utf8 bom
 set nobomb
 
@@ -109,6 +114,9 @@ set t_Co=256
 set autoread
 "status line
 
+"vim 啟用滑鼠
+set mouse=a
+
 com! -bang W :w
 com! -bang Q :q
 
@@ -121,6 +129,24 @@ if has("autocmd")
       \ endif
 endif
 
+"編輯文件時，標記時間
+":autocmd BufWritePre,FileWritePre *.html   ks|call LastMod()|'s
+":  fun LastMod()
+":    if line("$") > 20
+":      let l = 20
+":    else
+":      let l = line("$")
+":    endif
+":    exe "1," . l . "g/Last modified: /s/Last modified: .*/Last modified: " .
+":    \ strftime("%Y %b %d")
+":  endfun
+
+
+autocmd BufNewFile *.html  0r ~/.vim/html.txt
+
+" 在開tmux時，會根據你vim的檔名，去編輯label
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim | " . expand("%:t") . "'")
+autocmd VimLeave * call system("tmux rename-window 'tmux'")
 
 " 总是显示状态行
 "set laststatus=2
