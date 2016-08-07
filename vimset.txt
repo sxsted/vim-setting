@@ -19,7 +19,7 @@ Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
+"Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -39,8 +39,23 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" ==============================================================
+" active pkugins
 
+Plugin 'fisadev/FixedTaskList.vim'
+Plugin 'Yggdroot/indentLine'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/matchit.zip'
+"Plugin 'Valloric/YouCompleteMe'
 
+" ==============================================================
+" plugin setting and mappings
+map <F2> : TaskList<CR>
+map <F3> : IndentLinesToggle<CR>
+nmap <F4> <ESC>:NERDTree<CR>
+nmap <F5> :TagbarToggle<CR>
+nmap <F6> :Tlist<CR>
 
 "utf8 setting
 set fileencoding=utf-8
@@ -48,6 +63,7 @@ set fileencodings=utf-8,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1
 set encoding=utf-8
 set tenc=utf-8
 set fenc=utf-8
+set shell=/bin/sh
 
 "快捷切換編碼
 "set <C-u>=^U
@@ -59,7 +75,6 @@ set fenc=utf-8
 "自動縮排
 set autoindent
 
-nmap <F4> <ESC>:NERDTree<CR>
 
 "搜尋不分大小寫
 set ic
@@ -82,13 +97,20 @@ set tabstop=4
 
 set cindent
 
-"syntax on
-"set background=dark
+"vim支援 256色
+set t_Co=256
+
+syntax enable
+syntax on
+set background=dark
 "colorscheme vanzan_color
-"colorscheme blackboard
-colorscheme darkblue
+colorscheme blackboard
+"colorscheme desert
+"colorscheme molokai
+"colorscheme darkblue
 "colorscheme primary 
 "colorscheme PerfectDark 
+"colorscheme solarized
 
 set nocompatible
 set nu
@@ -108,8 +130,6 @@ set incsearch
 "可以用{{{}}}縮排folded
 set foldmethod=marker
 
-"vim支援 256色
-set t_Co=256
 
 set autoread
 "status line
