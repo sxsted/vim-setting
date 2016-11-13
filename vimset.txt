@@ -90,6 +90,14 @@ nnoremap <right> :n<CR><Esc>zz
 "使用 ;; 代替 <esc>
 inoremap ;; <Esc>
 
+" 自動補齊括號
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap { {}<LEFT>
+" 單，雙引號補齊
+inoremap ' ''<LEFT>
+inoremap " ""<LEFT>
+
 "自動縮排
 set autoindent
 set smartindent
