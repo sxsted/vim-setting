@@ -51,7 +51,9 @@ Plugin 'vim-scripts/matchit.zip'
 " 快速註解
 Plugin 'scrooloose/nerdcommenter'
 
-"Plugin 'Valloric/YouCompleteMe'
+" 自動補齊 & term_for_vim
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'marijnh/tern_for_vim'
 
 " 快速插入符號：" ' {[ ...
 Plugin 'tpope/vim-surround'
