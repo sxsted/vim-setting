@@ -55,6 +55,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'marijnh/tern_for_vim'
 
+" 語法檢查
+Plugin 'scrooloose/syntastic'
+
 " 快速插入符號：" ' {[ ...
 Plugin 'tpope/vim-surround'
 
