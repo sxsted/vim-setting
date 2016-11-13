@@ -47,7 +47,17 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/matchit.zip'
+
+" 快速註解
+Plugin 'scrooloose/nerdcommenter'
+
 "Plugin 'Valloric/YouCompleteMe'
+
+" 快速插入符號：" ' {[ ...
+Plugin 'tpope/vim-surround'
+
+" repeat
+Plugin 'tpope/vim-repeat'
 
 " ==============================================================
 " plugin setting and mappings
@@ -71,9 +81,18 @@ set shell=/bin/sh
 "map <C-u> :set fileencoding=utf8
 "map <C-b> :set fileencoding=big5
 
+"鍵盤上下改為 翻頁且置中，左右改為前後分頁切換且置中
+nnoremap <up> <C-U>zz
+nnoremap <down> <C-D>zz
+nnoremap <left> :N<CR><Esc>zz
+nnoremap <right> :n<CR><Esc>zz
+
+"使用 ;; 代替 <esc>
+inoremap ;; <Esc>
 
 "自動縮排
 set autoindent
+set smartindent
 
 
 "搜尋不分大小寫
@@ -104,9 +123,8 @@ syntax enable
 syntax on
 set background=dark
 "colorscheme vanzan_color
-colorscheme blackboard
-"colorscheme desert
-"colorscheme molokai
+"colorscheme blackboard
+colorscheme desert
 "colorscheme darkblue
 "colorscheme primary 
 "colorscheme PerfectDark 
@@ -118,6 +136,9 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" remember info about open buffers on close
+set viminfo^=%
+
 " autocomplete js
 set omnifunc=javascriptcomplete#CompleteJS
 "delete utf8 bom
@@ -128,6 +149,13 @@ set hlsearch
 set incsearch
 
 "可以用{{{}}}縮排folded
+"manual 手工折疊
+"indent 縮進折疊
+"expr   表達式折疊
+"syntax 語法折疊
+"diff   對沒有更改的文件折曡
+"marker 標記折疊
+set foldenable
 set foldmethod=marker
 
 
@@ -136,6 +164,9 @@ set autoread
 
 "vim 啟用滑鼠
 set mouse=a
+
+"設置代碼匹配，包括括號匹配情況
+set showmatch
 
 com! -bang W :w
 com! -bang Q :q
@@ -186,3 +217,16 @@ highlight User4 term=underline cterm=underline ctermfg=white
 highlight User5 ctermfg=cyan 
 highlight User6 ctermfg=white 
 
+"trim whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+function! TrimWhiteSpace()
+    %s/\s\+$//e
+endfunction
+autocmd BufWritePre     *.js :call TrimWhiteSpace()
+autocmd BufWritePre     *.css :call TrimWhiteSpace()
+autocmd BufWritePre     *.html :call TrimWhiteSpace()
