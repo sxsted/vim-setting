@@ -43,13 +43,14 @@ filetype plugin indent on    " required
 " active pkugins
 
 Plugin 'fisadev/FixedTaskList.vim'
-Plugin 'Yggdroot/indentLine'
+"Plugin 'Yggdroot/indentLine'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/matchit.zip'
 
 " 快速註解
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 
 " 自動補齊 & term_for_vim
 Plugin 'Valloric/YouCompleteMe'
@@ -64,10 +65,15 @@ Plugin 'tpope/vim-surround'
 " repeat
 Plugin 'tpope/vim-repeat'
 
+" nerdTree style
+"Plugin 'ryanoasis/vim-devicons'
+"Plugin 'ryanoasis/nerd-fonts'
+"Plugin 'bling/vim-airline'
+
 " ==============================================================
 " plugin setting and mappings
 map <F2> : TaskList<CR>
-map <F3> : IndentLinesToggle<CR>
+"map <F3> : IndentLinesToggle<CR>
 nmap <F4> <ESC>:NERDTree<CR>
 nmap <F5> :TagbarToggle<CR>
 nmap <F6> :Tlist<CR>
@@ -80,16 +86,47 @@ set tenc=utf-8
 set fenc=utf-8
 set shell=/bin/sh
 
-"配合語法檢查plugin，所設定的配置
+"nerdTree setting
+"let g:nerdTree_tabs_autofind = 0
+"set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 12
+"let g:airline_powerline_fonts = 1
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+"syntastic 配合語法檢查plugin，所設定的配置
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height = 5
+""let g:syntastic_aggregate_errors = 1
 let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_html_checkers = ['jshint']
 
+" youCompleteme plugin color setting
+" highlight Pmenu ctermbg=red guifg=#ffffff guibg=red
+
+"highlight YcmErrorLine guibg=#3f0000
 "快捷切換編碼
 "set <C-u>=^U
 "set <C-b>=^B
@@ -219,7 +256,7 @@ endif
 autocmd BufNewFile *.html  0r ~/.vim/html.txt
 
 " 在開tmux時，會根據你vim的檔名，去編輯label
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim | " . expand("%:t") . "'")
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window ' vim | " . expand("%:t") . "'")
 autocmd VimLeave * call system("tmux rename-window 'tmux'")
 
 " 总是显示状态行
