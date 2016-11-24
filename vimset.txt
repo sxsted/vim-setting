@@ -65,6 +65,9 @@ Plugin 'tpope/vim-surround'
 " repeat
 Plugin 'tpope/vim-repeat'
 
+" vim theme gruvbox
+Plugin 'morhetz/gruvbox'
+
 " nerdTree style
 "Plugin 'ryanoasis/vim-devicons'
 "Plugin 'ryanoasis/nerd-fonts'
@@ -184,7 +187,8 @@ syntax on
 set background=dark
 "colorscheme vanzan_color
 "colorscheme blackboard
-colorscheme desert
+"colorscheme desert
+colorscheme gruvbox
 "colorscheme darkblue
 "colorscheme primary 
 "colorscheme PerfectDark 
