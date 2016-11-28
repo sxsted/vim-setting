@@ -68,6 +68,9 @@ Plugin 'tpope/vim-repeat'
 " vim theme gruvbox
 Plugin 'morhetz/gruvbox'
 
+" ctrlp 
+Plugin 'kien/ctrlp.vim'
+
 " nerdTree style
 "Plugin 'ryanoasis/vim-devicons'
 "Plugin 'ryanoasis/nerd-fonts'
