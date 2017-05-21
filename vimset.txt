@@ -83,6 +83,7 @@ map <F2> : TaskList<CR>
 nmap <F4> <ESC>:NERDTree<CR>
 nmap <F5> :TagbarToggle<CR>
 nmap <F6> :Tlist<CR>
+nmap <F7> :lclo<CR>
 
 "utf8 setting
 set fileencoding=utf-8
@@ -183,7 +184,7 @@ set tabstop=4
 set cindent
 
 "vim支援 256色
-set t_Co=256
+"set t_Co=256
 
 syntax enable
 syntax on
@@ -261,6 +262,7 @@ endif
 
 
 autocmd BufNewFile *.html  0r ~/.vim/html.txt
+autocmd BufNewFile *.php  0r ~/.vim/php.txt
 
 " 在開tmux時，會根據你vim的檔名，去編輯label
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window ' vim | " . expand("%:t") . "'")
